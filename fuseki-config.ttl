@@ -1,0 +1,36 @@
+@prefix fuseki:  <http://jena.apache.org/fuseki#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tdb:     <http://jena.hpl.hp.com/2008/tdb#> .
+@prefix ja:      <http://jena.hpl.hp.com/2005/11/Assembler#> .
+@prefix text:    <http://jena.apache.org/text#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl:  <http://www.w3.org/2008/05/skos-xl#> .
+@prefix agent:   <http://schema.onki.fi/agent-schema#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix spatial: <http://jena.apache.org/spatial#> .
+@prefix schema:  <http://schema.org/> .
+@prefix :        <#> .
+
+[] rdf:type fuseki:Server ;
+   # Server-wide context parameters can be given here.
+   # For example, to set query timeouts: on a server-wide basis:
+   # Format 1: "1000" -- 1 second timeout
+   # Format 2: "10000,60000" -- 10s timeout to first result, then 60s timeout to for rest of query.
+   # See java doc for ARQ.queryTimeout
+   ja:context [ ja:cxtName "arq:queryTimeout" ;  ja:cxtValue "60000" ] ;
+
+   # Load custom code (rarely needed)
+   # ja:loadClass "your.code.Class" ;
+   ja:loadClass "fi.seco.silk.arq.SilkFunctions" ;
+   ja:loadClass "fi.seco.spatial.arq.SpatialFunctions" .
+
+# TDB
+tdb:DatasetTDB  rdfs:subClassOf  ja:RDFDataset .
+tdb:GraphTDB    rdfs:subClassOf  ja:Model .
+
+# Text
+[] ja:loadClass "org.apache.jena.query.text.TextQuery" .
+text:TextDataset      rdfs:subClassOf   ja:RDFDataset .
+text:TextIndexLucene  rdfs:subClassOf   text:TextIndex .
+
