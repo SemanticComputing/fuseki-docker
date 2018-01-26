@@ -1,0 +1,51 @@
+@prefix fuseki:  <http://jena.apache.org/fuseki#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tdb:     <http://jena.hpl.hp.com/2008/tdb#> .
+@prefix ja:      <http://jena.hpl.hp.com/2005/11/Assembler#> .
+@prefix text:    <http://jena.apache.org/text#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl:  <http://www.w3.org/2008/05/skos-xl#> .
+@prefix agent:   <http://schema.onki.fi/agent-schema#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix spatial: <http://jena.apache.org/spatial#> .
+@prefix schema:  <http://schema.org/> .
+@prefix :        <#> .
+
+<#service>  rdf:type fuseki:Service ;
+    fuseki:name              "ds" ;   # http://host:port/ds
+    fuseki:serviceQuery      "sparql" ;    # SPARQL query service
+    fuseki:serviceUpdate     "update" ;    # SPARQL update service
+    fuseki:serviceUpload     "upload" ;    # Non-SPARQL upload service
+    fuseki:serviceReadWriteGraphStore "data" ;     # SPARQL Graph store protocol
+    fuseki:dataset           <#dataset> ;
+    .
+
+<#dataset> rdf:type text:TextDataset ;
+    text:dataset <#tdb> ;
+    text:index <#lucene> ;
+    .
+
+<#tdb> rdf:type      tdb:DatasetTDB ;
+    tdb:location "/fuseki-base/databases/tdb" ;
+    # Make the default graph be the union of all named graphs.
+    tdb:unionDefaultGraph true ;
+    .
+
+<#lucene> a text:TextIndexLucene ;
+    text:directory <file:/fuseki-base/databases/lucene> ;
+    text:entityMap <#entity-map> ;
+    .
+
+<#entity-map> a text:EntityMap ;
+    text:entityField "uri" ;
+    text:graphField "graph" ; ## enable graph-specific indexing
+    text:defaultField "text" ; ## Must be defined in the text:map
+    text:uidField "uid" ;
+    text:map (
+         [ text:field "text" ; text:predicate skos:prefLabel ]
+         [ text:field "text" ; text:predicate skos:altLabel ]
+         [ text:field "text" ; text:predicate skos:hiddenLabel ]
+         [ text:field "text" ; text:predicate rdfs:label ]
+         )
+    .
