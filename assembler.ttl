@@ -12,21 +12,49 @@
 @prefix schema:  <http://schema.org/> .
 @prefix :        <#> .
 
-<#service>  rdf:type fuseki:Service ;
+<#service> rdf:type fuseki:Service ;
     fuseki:name              "ds" ;   # http://host:port/ds
     fuseki:serviceQuery      "sparql" ;    # SPARQL query service
-    fuseki:serviceUpdate     "update" ;    # SPARQL update service
-    fuseki:serviceUpload     "upload" ;    # Non-SPARQL upload service
-    fuseki:serviceReadWriteGraphStore "data" ;     # SPARQL Graph store protocol
+    #fuseki:serviceUpdate     "update" ;    # SPARQL update service
+    #fuseki:serviceUpload     "upload" ;    # Non-SPARQL upload service
+    #fuseki:serviceReadWriteGraphStore "data" ;     # SPARQL Graph store protocol
+    fuseki:serviceReadGraphStore    "data" ;     # SPARQL Graph store protocol (read only)
     fuseki:dataset           <#dataset> ;
+#    fuseki:dataset           <#tdb> ;
     .
 
-<#dataset> rdf:type text:TextDataset ;
+<#dataset> rdf:type spatial:SpatialDataset ;
+    spatial:dataset <#text> ;
+    spatial:index <#spatiallucene> ;
+    .
+
+<#spatiallucene> a spatial:SpatialIndexLucene ;
+    spatial:directory <file:/fuseki-base/databases/spatiallucene> ;
+    spatial:definition <#spatialdefinition> ;
+    .
+
+<#spatialdefinition> a spatial:EntityDefinition ;
+    spatial:entityField      "uri" ;
+    spatial:geoField     "geo" ;
+    # custom geo predicates for 1) Latitude/Longitude Format
+    # spatial:hasSpatialPredicatePairs (
+    #     [ spatial:latitude :latitude_1 ; spatial:longitude :longitude_1 ]
+    #     [ spatial:latitude :latitude_2 ; spatial:longitude :longitude_2 ]
+    #     ) ;
+    # custom geo predicates for 2) Well Known Text (WKT) Literal
+    # spatial:hasWKTPredicates (:wkt_1 :wkt_2) ;
+    spatial:hasWKTPredicates (schema:polygon) ;
+    # custom SpatialContextFactory for 2) Well Known Text (WKT) Literal
+    spatial:spatialContextFactory
+         "org.locationtech.spatial4j.context.jts.JtsSpatialContextFactory"
+    .
+
+<#text> rdf:type text:TextDataset ;
     text:dataset <#tdb> ;
     text:index <#lucene> ;
     .
 
-<#tdb> rdf:type      tdb:DatasetTDB ;
+<#tdb> rdf:type tdb:DatasetTDB ;
     tdb:location "/fuseki-base/databases/tdb" ;
     # Make the default graph be the union of all named graphs.
     tdb:unionDefaultGraph true ;
