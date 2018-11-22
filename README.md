@@ -2,6 +2,8 @@
 
 Apache Jena Fuseki with SeCo extensions.
 
+Available also in Docker Hub: [secoresearch/fuseki](https://hub.docker.com/r/secoresearch/fuseki/)
+
 ## Build
 
 `docker build --squash -t secoresearch/fuseki .`

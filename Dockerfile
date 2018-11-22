@@ -17,18 +17,13 @@ FROM java:8-jre-alpine
 
 MAINTAINER Jouni Tuominen <jouni.tuominen@aalto.fi>
 
-#RUN apk add --update pwgen bash wget ca-certificates && rm -rf /var/cache/apk/*
 RUN apk add --update pwgen bash wget ca-certificates findutils coreutils && rm -rf /var/cache/apk/*
 
 # Update below according to https://jena.apache.org/download/
-#ENV FUSEKI_SHA1 d7ba62fcc5230fe86a7a8e5fc79890ea37af7395
-#ENV FUSEKI_VERSION 3.7.0
-ENV FUSEKI_SHA1 22db12165b820e05f07bee5688c22db04b521467
-ENV FUSEKI_VERSION 3.6.0
-#ENV JENA_SHA1 f70dbd795872ebbd4d4a81dcfcd6317411e7b0ae
-#ENV JENA_VERSION 3.7.0
-ENV JENA_SHA1 dc209016fa1d631324839d7aaf3ccf673cc9d4fd
-ENV JENA_VERSION 3.6.0
+ENV FUSEKI_SHA1 1b6a690dc4a19e1c76a3539d9f3b47a686ec7f06
+ENV FUSEKI_VERSION 3.9.0
+ENV JENA_SHA1 b8f20f4219efd8a3b33e00ea00b969972915a4df
+ENV JENA_VERSION 3.9.0
 
 ENV MIRROR http://www.eu.apache.org/dist/
 ENV ARCHIVE http://archive.apache.org/dist/
