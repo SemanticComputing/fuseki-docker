@@ -17,7 +17,7 @@ FROM java:8-jre-alpine
 
 MAINTAINER Jouni Tuominen <jouni.tuominen@aalto.fi>
 
-RUN apk add --update pwgen bash wget ca-certificates findutils coreutils && rm -rf /var/cache/apk/*
+RUN apk add --update pwgen bash wget ca-certificates findutils coreutils ruby && rm -rf /var/cache/apk/*
 
 # Update below according to https://jena.apache.org/download/
 ENV FUSEKI_SHA1 1b6a690dc4a19e1c76a3539d9f3b47a686ec7f06
