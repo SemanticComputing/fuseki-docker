@@ -20,10 +20,10 @@ MAINTAINER Jouni Tuominen <jouni.tuominen@aalto.fi>
 RUN apk add --update pwgen bash wget ca-certificates findutils coreutils ruby && rm -rf /var/cache/apk/*
 
 # Update below according to https://jena.apache.org/download/
-ENV FUSEKI_SHA1 1b6a690dc4a19e1c76a3539d9f3b47a686ec7f06
-ENV FUSEKI_VERSION 3.9.0
-ENV JENA_SHA1 b8f20f4219efd8a3b33e00ea00b969972915a4df
-ENV JENA_VERSION 3.9.0
+ENV FUSEKI_SHA512 2d5c4e245d0d03bc994248dd43f718b8467d5b81204e2894abba86ec20b66939c84134580618d91d9b15bd90d90b090ab4bc691ae8778eb060d06df117dda8bb 
+ENV FUSEKI_VERSION 3.10.0
+ENV JENA_SHA512 7dafe7aa28cb85a6da9f6f2b109372ec0d097d4f07d8cb5882dde814b55cdb60512ab9bc09c2593118aaf3fbbc1f65f1d3b921faca7bddefd3f6bf9d7f332998
+ENV JENA_VERSION 3.10.0
 
 ENV MIRROR http://www.eu.apache.org/dist/
 ENV ARCHIVE http://archive.apache.org/dist/
@@ -38,24 +38,24 @@ ENV JENA_HOME /jena
 ENV JENA_BIN $JENA_HOME/bin
 
 WORKDIR /tmp
-# sha1 checksum
-RUN echo "$FUSEKI_SHA1  fuseki.tar.gz" > fuseki.tar.gz.sha1
+# sha512 checksum
+RUN echo "$FUSEKI_SHA512  fuseki.tar.gz" > fuseki.tar.gz.sha512
 # Download/check/unpack/move Fuseki in one go (to reduce image size)
 RUN wget -O fuseki.tar.gz $MIRROR/jena/binaries/apache-jena-fuseki-$FUSEKI_VERSION.tar.gz || \
     wget -O fuseki.tar.gz $ARCHIVE/jena/binaries/apache-jena-fuseki-$FUSEKI_VERSION.tar.gz && \
-    sha1sum -c fuseki.tar.gz.sha1 && \
+    sha512sum -c fuseki.tar.gz.sha512 && \
     tar zxf fuseki.tar.gz && \
     mv apache-jena-fuseki* $FUSEKI_HOME && \
     rm fuseki.tar.gz* && \
     cd $FUSEKI_HOME && rm -rf fuseki.war
 
 # Get tdbloader2 from Jena
-# sha1 checksum
-RUN echo "$JENA_SHA1  jena.tar.gz" > jena.tar.gz.sha1
+# sha512 checksum
+RUN echo "$JENA_SHA512  jena.tar.gz" > jena.tar.gz.sha512
 # Download/check/unpack/move Jena in one go (to reduce image size)
 RUN wget -O jena.tar.gz $MIRROR/jena/binaries/apache-jena-$JENA_VERSION.tar.gz || \
     wget -O jena.tar.gz $ARCHIVE/jena/binaries/apache-jena-$JENA_VERSION.tar.gz && \
-    sha1sum -c jena.tar.gz.sha1 && \
+    sha512sum -c jena.tar.gz.sha512 && \
     tar zxf jena.tar.gz && \
 	mkdir -p $JENA_BIN && \
 	mv apache-jena*/lib $JENA_HOME && \
