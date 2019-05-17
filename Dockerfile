@@ -13,7 +13,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-FROM java:8-jre-alpine
+FROM openjdk:8-jre-alpine
 
 MAINTAINER Jouni Tuominen <jouni.tuominen@aalto.fi>
 
