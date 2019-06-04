@@ -100,3 +100,14 @@ USER 9008
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["java", "-cp", "*:/javalibs/*", "org.apache.jena.fuseki.cmd.FusekiCmd"]
+
+
+# EXTRA TOOLS
+# extra tools that may be useful for modifying fuseki offline (e.g. importing datasets)
+# Replace CMD with infinite sleep instead of starting fuseki.
+
+USER 0
+RUN apk add --no-cache parallel rsync vim
+USER 9008
+
+CMD [ "sleep", "infinity" ]
