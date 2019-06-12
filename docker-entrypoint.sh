@@ -37,4 +37,8 @@ if [ -n "$ADMIN_PASSWORD" ] ; then
   sed -i "s/^admin=.*/admin=$ADMIN_PASSWORD/" "$FUSEKI_BASE/shiro.ini"
 fi
 
+test ${ENABLE_DATA_WRITE} && sed -i 's/\(fuseki:serviceReadGraphStore\)/#\1/' $ASSEMBLER && sed -i 's/#\s*\(fuseki:serviceReadWriteGraphStore\)/\1/' $ASSEMBLER
+test ${ENABLE_UPDATE} && sed -i 's/#\s*\(fuseki:serviceUpdate\)/\1/' $ASSEMBLER
+test ${ENABLE_UPLOAD} && sed -i 's/#\s*\(fuseki:serviceUpload\)/\1/' $ASSEMBLER 
+
 exec "$@"
