@@ -16,29 +16,35 @@
 
 set -e
 
-if [ ! -f "$FUSEKI_BASE/shiro.ini" ] ; then
-  # First time
-  echo "###################################"
-  echo "Initializing Apache Jena Fuseki"
-  echo ""
-  cp "$FUSEKI_HOME/shiro.ini" "$FUSEKI_BASE/shiro.ini"
-  if [ -z "$ADMIN_PASSWORD" ] ; then
-    ADMIN_PASSWORD=$(pwgen -s 15)
-    echo "Randomly generated admin password:"
-    echo ""
-    echo "admin=$ADMIN_PASSWORD"
-  fi
-  echo ""
-  echo "###################################"
-fi
+init() {
+    if [ ! -f "$FUSEKI_BASE/shiro.ini" ] ; then
+        # First time
+        echo "###################################"
+        echo "Initializing Apache Jena Fuseki"
+        echo ""
+        cp "$FUSEKI_HOME/shiro.ini" "$FUSEKI_BASE/shiro.ini"
+        if [ -z "$ADMIN_PASSWORD" ] ; then
+            ADMIN_PASSWORD=$(pwgen -s 15)
+            echo "Randomly generated admin password:"
+            echo ""
+            echo "admin=$ADMIN_PASSWORD"
+        fi
+        echo ""
+        echo "###################################"
+    fi
+    
+    # $ADMIN_PASSWORD can always override
+    if [ -n "$ADMIN_PASSWORD" ] ; then
+        sed -i "s/^admin=.*/admin=$ADMIN_PASSWORD/" "$FUSEKI_BASE/shiro.ini"
+    fi
+    
+    test "${ENABLE_DATA_WRITE}" = true && sed -i 's/\(fuseki:serviceReadGraphStore\)/#\1/' $ASSEMBLER && sed -i 's/#\s*\(fuseki:serviceReadWriteGraphStore\)/\1/' $ASSEMBLER
+    test "${ENABLE_UPDATE}" = true && sed -i 's/#\s*\(fuseki:serviceUpdate\)/\1/' $ASSEMBLER
+    test "${ENABLE_UPLOAD}" = true && sed -i 's/#\s*\(fuseki:serviceUpload\)/\1/' $ASSEMBLER 
+}
 
-# $ADMIN_PASSWORD can always override
-if [ -n "$ADMIN_PASSWORD" ] ; then
-  sed -i "s/^admin=.*/admin=$ADMIN_PASSWORD/" "$FUSEKI_BASE/shiro.ini"
+if [ ! -n "${NO_INIT:-}" ]; then
+    init
 fi
-
-test "${ENABLE_DATA_WRITE}" = true && sed -i 's/\(fuseki:serviceReadGraphStore\)/#\1/' $ASSEMBLER && sed -i 's/#\s*\(fuseki:serviceReadWriteGraphStore\)/\1/' $ASSEMBLER
-test "${ENABLE_UPDATE}" = true && sed -i 's/#\s*\(fuseki:serviceUpdate\)/\1/' $ASSEMBLER
-test "${ENABLE_UPLOAD}" = true && sed -i 's/#\s*\(fuseki:serviceUpload\)/\1/' $ASSEMBLER 
 
 exec "$@"
