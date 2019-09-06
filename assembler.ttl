@@ -62,6 +62,7 @@
 
 <#lucene> a text:TextIndexLucene ;
     text:directory <file:/fuseki-base/databases/lucene> ;
+    text:storeValues true ;
     text:entityMap <#entity-map> ;
     .
 
@@ -70,6 +71,7 @@
     text:graphField "graph" ; ## enable graph-specific indexing
     text:defaultField "text" ; ## Must be defined in the text:map
     text:uidField "uid" ;
+    text:langField "lang" ;
     text:map (
          [ text:field "text" ; text:predicate skos:prefLabel ]
          [ text:field "text" ; text:predicate skos:altLabel ]
