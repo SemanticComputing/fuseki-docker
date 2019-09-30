@@ -107,7 +107,7 @@ CMD ["java", "-cp", "*:/javalibs/*", "org.apache.jena.fuseki.cmd.FusekiCmd"]
 # Replace CMD with infinite sleep instead of starting fuseki.
 
 USER 0
-RUN apk add --no-cache parallel rsync vim dash
+RUN apk add --no-cache parallel rsync vim dash openssh
 RUN rm /bin/sh; ln -s /usr/bin/dash /bin/sh
 USER 9008
 
