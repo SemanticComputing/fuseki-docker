@@ -77,7 +77,8 @@ COPY silk-arq-1.0.0-SNAPSHOT-with-dependencies.jar /javalibs/
 # Fuseki config
 ENV ASSEMBLER $FUSEKI_BASE/configuration/assembler.ttl
 COPY assembler.ttl $ASSEMBLER
-COPY fuseki-config.ttl $FUSEKI_BASE/config.ttl
+ENV CONFIG $FUSEKI_BASE/config.ttl
+COPY fuseki-config.ttl $CONFIG
 RUN mkdir -p $FUSEKI_BASE/databases
 
 # Set permissions to allow fuseki to run as an arbitrary user
