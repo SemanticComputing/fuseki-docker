@@ -15,15 +15,15 @@
 
 FROM java:8-jre-alpine
 
-MAINTAINER Jouni Tuominen <jouni.tuominen@aalto.fi>
+LABEL maintainer="jouni.tuominen@aalto.fi"
 
 RUN apk add --update pwgen bash wget ca-certificates findutils coreutils ruby && rm -rf /var/cache/apk/*
 
 # Update below according to https://jena.apache.org/download/
-ENV FUSEKI_SHA512 e934431a4b76c347c71480c620b19263b46cde359d3da508acffbe92ef21168eea2a17478f68e4b583a55a4e3a8b0c6b0e1b558ee8eba54bd777b3909669e7da
-ENV FUSEKI_VERSION 3.12.0
-ENV JENA_SHA512 d1eba835acd0d15f959dd403918e17bc7e44312d3788640ab6a0d3453b22105f40a2c5feea675137d2773db74e4ca15dd018ff16d8576e01fdceba81e36f04fa
-ENV JENA_VERSION 3.12.0
+ENV FUSEKI_SHA512 2b92f3304743da335f648c1be7b5d7c3a94725ed0a9b5123362c89a50986690114dcef0813e328126b14240f321f740b608cc353417e485c9235476f059bd380
+ENV FUSEKI_VERSION 3.17.0
+ENV JENA_SHA512 321c763fa3b3532fa06bb146363722e58e10289194f622f2e29117b610521e62e7ea51b9d06cd366570ed143f2ebbeded22e5302d2375b49da253b7ddef86d34
+ENV JENA_VERSION 3.17.0
 
 ENV MIRROR http://www.eu.apache.org/dist/
 ENV ARCHIVE http://archive.apache.org/dist/
@@ -71,7 +71,6 @@ COPY docker-entrypoint.sh /
 RUN chmod 755 /docker-entrypoint.sh
 
 # SeCo extensions
-COPY spatial-arq-1.0.0-SNAPSHOT-with-dependencies.jar /javalibs/
 COPY silk-arq-1.0.0-SNAPSHOT-with-dependencies.jar /javalibs/
 
 # Fuseki config
@@ -91,7 +90,6 @@ ENV TDBLOADER $JAVA_CMD tdb.tdbloader --desc=$ASSEMBLER
 ENV TDBLOADER2 $JENA_BIN/tdbloader2 --loc=$FUSEKI_BASE/databases/tdb
 ENV TDB2TDBLOADER $JAVA_CMD tdb2.tdbloader --desc=$ASSEMBLER
 ENV TEXTINDEXER $JAVA_CMD jena.textindexer --desc=$ASSEMBLER
-ENV SPATIALINDEXER $JAVA_CMD jena.spatialindexer --desc=$ASSEMBLER
 ENV TDBSTATS $JAVA_CMD tdb.tdbstats --desc=$ASSEMBLER
 ENV TDB2TDBSTATS $JAVA_CMD tdb2.tdbstats --desc=$ASSEMBLER
 

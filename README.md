@@ -6,7 +6,7 @@ Available in Docker Hub: [secoresearch/fuseki](https://hub.docker.com/r/secorese
 
 The Fuseki administrative interface is accessible at `http://localhost:3030` with the admin password defined as `docker run` parameter (see the `Run` section below).
 
-The container has a preconfigured service/dataset `ds` that uses [TDB](https://jena.apache.org/documentation/tdb/) for data storage and has a Lucene [text index](https://jena.apache.org/documentation/query/text-query.html) and [spatial index](https://jena.apache.org/documentation/query/spatial-query.html) (see [assembler.ttl](https://github.com/SemanticComputing/fuseki-docker/blob/master/assembler.ttl) for configuration).
+The container has a preconfigured service/dataset `ds` that uses [TDB](https://jena.apache.org/documentation/tdb/) for data storage and has a Lucene [text index](https://jena.apache.org/documentation/query/text-query.html) (see [assembler.ttl](https://github.com/SemanticComputing/fuseki-docker/blob/master/assembler.ttl) for configuration).
 
 The query timeout is configured to 60 seconds by default (see the `Run` section below for instructions on configuration).
 
@@ -21,7 +21,7 @@ Other endpoints can be enabled, as well (see the Run section for instructions):
 * Graph Store HTTP Protocol with write access: `http://localhost:3030/ds/data`
 * File Upload: `http://localhost:3030/ds/upload`
 
-The container includes Jena tdbloader, textindexer, spatialindexer, and tdbstats scripts for loading RDF data into TDB model. See the [Dockerfile of the congress-legislators dataset](https://github.com/SemanticComputing/congress-legislators/blob/master/Dockerfile) for an example.
+The container includes Jena tdbloader, textindexer, and tdbstats scripts for loading RDF data into TDB model. See the [Dockerfile of the congress-legislators dataset](https://github.com/SemanticComputing/congress-legislators/blob/master/Dockerfile) for an example.
 
 ## Persistent storage
 

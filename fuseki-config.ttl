@@ -22,8 +22,7 @@
 
    # Load custom code (rarely needed)
    # ja:loadClass "your.code.Class" ;
-   ja:loadClass "fi.seco.silk.arq.SilkFunctions" ;
-   ja:loadClass "fi.seco.spatial.arq.SpatialFunctions" .
+   ja:loadClass "fi.seco.silk.arq.SilkFunctions" .
 
 # TDB
 tdb:DatasetTDB  rdfs:subClassOf  ja:RDFDataset .
@@ -33,4 +32,3 @@ tdb:GraphTDB    rdfs:subClassOf  ja:Model .
 [] ja:loadClass "org.apache.jena.query.text.TextQuery" .
 text:TextDataset      rdfs:subClassOf   ja:RDFDataset .
 text:TextIndexLucene  rdfs:subClassOf   text:TextIndex .
-
