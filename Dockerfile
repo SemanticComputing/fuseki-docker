@@ -13,17 +13,17 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-FROM java:8-jre-alpine
+FROM openjdk:14-alpine AS base
 
 LABEL maintainer="jouni.tuominen@aalto.fi"
 
 RUN apk add --update pwgen bash wget ca-certificates findutils coreutils ruby && rm -rf /var/cache/apk/*
 
 # Update below according to https://jena.apache.org/download/
-ENV FUSEKI_SHA512 2b92f3304743da335f648c1be7b5d7c3a94725ed0a9b5123362c89a50986690114dcef0813e328126b14240f321f740b608cc353417e485c9235476f059bd380
-ENV FUSEKI_VERSION 3.17.0
-ENV JENA_SHA512 321c763fa3b3532fa06bb146363722e58e10289194f622f2e29117b610521e62e7ea51b9d06cd366570ed143f2ebbeded22e5302d2375b49da253b7ddef86d34
-ENV JENA_VERSION 3.17.0
+ENV FUSEKI_SHA512 c0b9ab61a57f2c0e027f9d1a07710a22e672eb87730a6460b0869f6a6997a2628703bd99b1590bccd38bdc2a0f78d7be17890b4b88f65ef5518c882c8736a6b3
+ENV FUSEKI_VERSION 4.0.0
+ENV JENA_SHA512 20706c955faebd2f090ce741a3b836016b75f86135e658d5d8cceb00a36b800f4e6158238bbfb7751bf13c1167d60236c49fbc7e099cd2e4c357bf36fe3323ca
+ENV JENA_VERSION 4.0.0
 
 ENV MIRROR http://www.eu.apache.org/dist/
 ENV ARCHIVE http://archive.apache.org/dist/
