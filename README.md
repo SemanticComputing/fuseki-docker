@@ -8,6 +8,8 @@ The Fuseki administrative interface is accessible at `http://localhost:3030` wit
 
 The container has a preconfigured service/dataset `ds` that uses [TDB](https://jena.apache.org/documentation/tdb/) for data storage and has a Lucene [text index](https://jena.apache.org/documentation/query/text-query.html) (see [assembler.ttl](https://github.com/SemanticComputing/fuseki-docker/blob/master/assembler.ttl) for configuration).
 
+The dataset has the `tdb:unionDefaultGraph` set to `true`, meaning that the query patterns on the default graph match against the union of the named graphs. **Note:** [the stored default graph](https://jena.apache.org/documentation/tdb/datasets.html) is not part of this union of the named graphs. Thus, if you add data into the default graph, you will have to access the graph data by using the special name `<urn:x-arq:DefaultGraph>` in a GRAPH pattern.
+
 The query timeout is configured to 60 seconds by default (see the `Run` section below for instructions on configuration).
 
 ## Data access
