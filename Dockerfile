@@ -25,8 +25,8 @@ ENV FUSEKI_VERSION 4.2.0
 ENV JENA_SHA512 783f049742fa8d19cc2c7b0184adc2f13e6fdec4a68815e883c50155aa7f045edc2a38a17249ec40a2c020ce64208a7a14a400a0f6bbc47dda316fcf52833bfe
 ENV JENA_VERSION 4.2.0
 
-ENV MIRROR https://dlcdn.apache.org/
-ENV ARCHIVE http://archive.apache.org/dist/
+ENV MIRROR https://dlcdn.apache.org
+ENV ARCHIVE http://archive.apache.org/dist
 
 # Config and data
 ENV FUSEKI_BASE /fuseki-base
