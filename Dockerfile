@@ -19,11 +19,11 @@ LABEL maintainer="jouni.tuominen@aalto.fi"
 
 RUN apk add --update pwgen bash wget ca-certificates findutils coreutils ruby && rm -rf /var/cache/apk/*
 
-# Update below according to https://jena.apache.org/download/
-ENV FUSEKI_SHA512 c52c007b97332e4b949d84280869d1f75c8b71ddf5893385fa993ed1abdb2718827307f4ef5cbf675573e887124e9bd5ca62b56070fe7fd790b5474b9ecd1614
-ENV FUSEKI_VERSION 4.3.0
-ENV JENA_SHA512 f81186d6b62626c77bb279a5c88b7c6c506e1ac160885519f5620d8bc83b2e62ff3d4d2ae255a07e32362f379fdcc464706a0ee35566a304069ae68d3c48096a
-ENV JENA_VERSION 4.3.0
+# Update below according to htps://jena.apache.org/download/
+ENV FUSEKI_SHA512 f4db927a591207fc7fec3575e34ec3c88b14a75ed1cf2c44c2ee230723c0a5b4da99bddc6d86eed17da58e910d4ef07b9d603b1b5112d408e2484475bbc56bb8
+ENV FUSEKI_VERSION 4.3.1
+ENV JENA_SHA512 cf026a4fe746a4d882920d45487cb792c96d3479b6bb9318b0c2039207fb45dd3c7eb46ae1dfae7664856f560f85676a91e8870f61eb1f4f18c850dfed2e5cc3
+ENV JENA_VERSION 4.3.1
 
 ENV MIRROR https://dlcdn.apache.org
 ENV ARCHIVE http://archive.apache.org/dist
@@ -98,4 +98,4 @@ EXPOSE 3030
 USER 9008
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["java", "-cp", "*:/javalibs/*", "-Dlog4j2.formatMsgNoLookups=true", "org.apache.jena.fuseki.cmd.FusekiCmd"]
+CMD ["java", "-cp", "*:/javalibs/*", "org.apache.jena.fuseki.cmd.FusekiCmd"]
