@@ -98,4 +98,4 @@ EXPOSE 3030
 USER 9008
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["java", "-cp", "*:/javalibs/*", "org.apache.jena.fuseki.cmd.FusekiCmd"]
+CMD ["java", "-cp", "*:/javalibs/*", "-Dlog4j2.formatMsgNoLookups=true", "org.apache.jena.fuseki.cmd.FusekiCmd"]
