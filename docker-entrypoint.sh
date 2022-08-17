@@ -40,6 +40,6 @@ fi
 test "${ENABLE_DATA_WRITE}" = true && sed -i 's/\(fuseki:serviceReadGraphStore\)/#\1/' $ASSEMBLER && sed -i 's/#\s*\(fuseki:serviceReadWriteGraphStore\)/\1/' $ASSEMBLER
 test "${ENABLE_UPDATE}" = true && sed -i 's/#\s*\(fuseki:serviceUpdate\)/\1/' $ASSEMBLER
 test "${ENABLE_UPLOAD}" = true && sed -i 's/#\s*\(fuseki:serviceUpload\)/\1/' $ASSEMBLER
-test "${QUERY_TIMEOUT}" && sed -i "s/\(ja:cxtName\s*\"arq:queryTimeout\"\s*;\s*ja:cxtValue\s*\)\"\d*\"/\1\"$QUERY_TIMEOUT\"/" $CONFIG
+test "${QUERY_TIMEOUT}" && sed -i "s/\(ja:cxtName\s*\"arq:queryTimeout\"\s*;\s*ja:cxtValue\s*\)\"[0-9]*\"/\1\"$QUERY_TIMEOUT\"/" $CONFIG
 
 exec "$@"
