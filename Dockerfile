@@ -20,11 +20,11 @@ LABEL maintainer="jouni.tuominen@aalto.fi"
 RUN apt-get update \
  && apt-get install -qq pwgen ruby wget
 
-# Update below according to htps://jena.apache.org/download/
-ENV FUSEKI_SHA512 12a7c242584fa739d0d1d2a4025267552069d8bf7b411545d0328e3cacc3bceddaac0584b405772b51464c33f695da86182a60480c72a661264677281771e700
-ENV FUSEKI_VERSION 4.6.1
-ENV JENA_SHA512 20c8de036e20a1722d122d87b10ed13bbb759550aeca51fd02371450146fb792e79f63d81595ddc4f1b9c63e522a88da18b0880218954c627bec159aacc7c3c5
-ENV JENA_VERSION 4.6.1
+# Update below according to https://jena.apache.org/download/
+ENV FUSEKI_SHA512 9646343a23c2563357207f559cb7437aa91b52d02b87e70d77b746b609e93ed0ad9dce06e072f864d53422946f24aa8ee60d9c594c1f82e8f2ab226eba56e474
+ENV FUSEKI_VERSION 4.7.0
+ENV JENA_SHA512 db8d05c28d890b5456f08e277d04c6b15fa10c20740430ce60de38689ff136e21a3b1cce298cd429c21b7af0a0a858080880b3fee0e121d9b68801e0b67ec51b
+ENV JENA_VERSION 4.7.0
 
 ENV MIRROR https://dlcdn.apache.org
 ENV ARCHIVE http://archive.apache.org/dist
