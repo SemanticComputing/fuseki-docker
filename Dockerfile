@@ -17,8 +17,9 @@ FROM openjdk:19-slim AS base
 
 LABEL maintainer="jouni.tuominen@aalto.fi"
 
+# jq needed for tdb2.xloader
 RUN apt-get update \
- && apt-get install -qq pwgen ruby wget
+ && apt-get install -qq jq pwgen ruby wget
 
 # Update below according to https://jena.apache.org/download/
 ENV FUSEKI_SHA512 84079078b761e31658c96797e788137205fc93091ab5ae511ba80bdbec3611f4386280e6a0dc378b80830f4e5ec3188643e2ce5e1dd35edfd46fa347da4dbe17
@@ -50,7 +51,7 @@ RUN wget -O fuseki.tar.gz $MIRROR/jena/binaries/apache-jena-fuseki-$FUSEKI_VERSI
     rm fuseki.tar.gz* && \
     cd $FUSEKI_HOME && rm -rf fuseki.war
 
-# Get tdbloader2 from Jena
+# Get tdb1.xloader and tdb2.xloader from Jena
 # sha512 checksum
 RUN echo "$JENA_SHA512  jena.tar.gz" > jena.tar.gz.sha512
 # Download/check/unpack/move Jena in one go (to reduce image size)
@@ -58,9 +59,10 @@ RUN wget -O jena.tar.gz $MIRROR/jena/binaries/apache-jena-$JENA_VERSION.tar.gz |
     wget -O jena.tar.gz $ARCHIVE/jena/binaries/apache-jena-$JENA_VERSION.tar.gz && \
     sha512sum -c jena.tar.gz.sha512 && \
     tar zxf jena.tar.gz && \
-	mkdir -p $JENA_BIN && \
-	mv apache-jena*/lib $JENA_HOME && \
-	mv apache-jena*/bin/tdbloader2* $JENA_BIN && \
+    mkdir -p $JENA_BIN && \
+    mv apache-jena*/lib $JENA_HOME && \
+    mv apache-jena*/bin/tdb1.xloader apache-jena*/bin/xload-* $JENA_BIN && \
+    mv apache-jena*/bin/tdb2.xloader $JENA_BIN && \
     rm -rf apache-jena* && \
     rm jena.tar.gz*
 
@@ -88,8 +90,9 @@ RUN chgrp -R 0 $FUSEKI_BASE \
 # Tools for loading data
 ENV JAVA_CMD java -cp "$FUSEKI_HOME/fuseki-server.jar:/javalibs/*"
 ENV TDBLOADER $JAVA_CMD tdb.tdbloader --desc=$ASSEMBLER
-ENV TDBLOADER2 $JENA_BIN/tdbloader2 --loc=$FUSEKI_BASE/databases/tdb
+ENV TDB1XLOADER $JENA_BIN/tdb1.xloader --loc=$FUSEKI_BASE/databases/tdb
 ENV TDB2TDBLOADER $JAVA_CMD tdb2.tdbloader --desc=$ASSEMBLER
+ENV TDB2XLOADER $JENA_BIN/tdb2.xloader --loc=$FUSEKI_BASE/databases/tdb
 ENV TEXTINDEXER $JAVA_CMD jena.textindexer --desc=$ASSEMBLER
 ENV TDBSTATS $JAVA_CMD tdb.tdbstats --desc=$ASSEMBLER
 ENV TDB2TDBSTATS $JAVA_CMD tdb2.tdbstats --desc=$ASSEMBLER
