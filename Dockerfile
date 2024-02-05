@@ -13,13 +13,12 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-FROM openjdk:19-slim AS base
+FROM eclipse-temurin:21-jre-alpine AS base
 
 LABEL maintainer="jouni.tuominen@aalto.fi"
 
 # jq needed for tdb2.xloader
-RUN apt-get update \
- && apt-get install -qq jq pwgen ruby wget
+RUN apk add --update bash ca-certificates coreutils findutils jq pwgen ruby wget && rm -rf /var/cache/apk/*
 
 # Update below according to https://jena.apache.org/download/
 ENV FUSEKI_SHA512 a4be52cc5f7f8767e362f893f28721f2887a3544ed779cd58fe0b32733575d97411b5a3bc2243995d6408e545bdefc5ab41c00b2c5d074df1dc0ca5063db5f83
