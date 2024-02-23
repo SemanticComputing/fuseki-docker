@@ -18,6 +18,7 @@
     #fuseki:serviceUpdate     "update" ;    # SPARQL update service
     #fuseki:serviceReadWriteGraphStore "data" ;     # SPARQL Graph store protocol
     fuseki:serviceReadGraphStore    "data" ;     # SPARQL Graph store protocol (read only)
+    #fuseki:endpoint [ fuseki:operation fuseki:shacl ; fuseki:name "shacl" ] ;
     fuseki:dataset           <#text> ;
 #    fuseki:dataset           <#tdb> ;
     .
