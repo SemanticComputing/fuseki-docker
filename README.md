@@ -1,8 +1,10 @@
-# Fuseki
+# Jena Fuseki Docker image
 
-Apache [Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) with SeCo extensions.
+Docker image for Apache [Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) with SeCo extensions.
 
-Available in Docker Hub: [secoresearch/fuseki](https://hub.docker.com/r/secoresearch/fuseki/).
+Available on Docker Hub: [secoresearch/fuseki](https://hub.docker.com/r/secoresearch/fuseki/).
+
+## Default configuration
 
 The Fuseki administrative interface is accessible at `http://localhost:3030` with the admin password defined as `docker run` parameter (see the `Run` section below).
 
