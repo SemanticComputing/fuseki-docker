@@ -1,6 +1,6 @@
 # Jena Fuseki Docker image
 
-Docker image for Apache [Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) with SeCo extensions.
+Docker image for Apache [Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) with SeCo extensions, inspired by [stain/jena-fuseki](https://github.com/stain/jena-docker/tree/master/jena-fuseki).
 
 Available on Docker Hub: [secoresearch/fuseki](https://hub.docker.com/r/secoresearch/fuseki/).
 
