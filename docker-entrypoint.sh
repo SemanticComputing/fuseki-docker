@@ -42,4 +42,9 @@ test "${ENABLE_UPDATE}" = true && sed -i 's/#\s*\(fuseki:serviceUpdate\)/\1/' $A
 test "${ENABLE_SHACL}" = true && sed -i -E 's/#\s*(fuseki:endpoint\s*\[\s*fuseki:operation\s+fuseki:shacl.+$)/\1/' $ASSEMBLER
 test "${QUERY_TIMEOUT}" && sed -i "s/\(ja:cxtName\s*\"arq:queryTimeout\"\s*;\s*ja:cxtValue\s*\)\"[0-9]*\"/\1\"$QUERY_TIMEOUT\"/" $CONFIG
 
-exec "$@"
+# Execute parent entrypoint to use system CA certificates
+if [ -n "$USE_SYSTEM_CA_CERTS" ] ; then
+  source /__cacert_entrypoint.sh
+else
+  exec "$@"
+fi
