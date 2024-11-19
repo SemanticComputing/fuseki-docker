@@ -52,7 +52,7 @@ RUN chgrp -R 0 $FUSEKI_BASE \
 
 ## Run
 
-`docker run --rm -it -p 3030:3030 --name fuseki -e ADMIN_PASSWORD=[PASSWORD] -e ENABLE_DATA_WRITE=[true|false] -e ENABLE_UPDATE=[true|false] -e ENABLE_SHACL=[true|false] -e QUERY_TIMEOUT=[number in milliseconds] --mount type=bind,source="$(pwd)"/fuseki-data,target=/fuseki-base/databases secoresearch/fuseki`
+`docker run --rm -it -p 3030:3030 --name fuseki -e ADMIN_PASSWORD=[PASSWORD] -e ENABLE_DATA_WRITE=[true|false] -e ENABLE_UPDATE=[true|false] -e ENABLE_SHACL=[true|false] -e QUERY_TIMEOUT=[number in milliseconds] -e USE_SYSTEM_CA_CERTS=[|1] --mount type=bind,source="$(pwd)"/fuseki-data,target=/fuseki-base/databases secoresearch/fuseki`
 
 Or to support adding new datasets using the Fuseki admin UI:
 
