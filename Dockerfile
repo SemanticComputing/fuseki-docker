@@ -21,10 +21,10 @@ LABEL maintainer="jouni.tuominen@aalto.fi"
 RUN apk add --update bash ca-certificates coreutils findutils jq pwgen ruby wget && rm -rf /var/cache/apk/*
 
 # Update below according to https://jena.apache.org/download/
-ENV FUSEKI_SHA512 650d4576927cb4e330c372c46f76dde3fbd683b59cc692bac501b545097402c58c2254b25502e4225ba6f7d4c79ee12c5e43b78124115dbbe6371c487aa8604f
-ENV FUSEKI_VERSION 5.2.0
-ENV JENA_SHA512 9a66044573ca269c0a9a1191fe7a8e1925f2d77e2e0bdadddd68616a1bafed1d9819c0b2988dd03614ec778a3882ccb091d825976fc0837406916f9f001b701c
-ENV JENA_VERSION 5.2.0
+ENV FUSEKI_SHA512 5204eefefb921ec029346139f5cb768fe298c816c8642ab590c9bdcee4f24cfacfb15c4266f7acf020d0d5232eea909e4af876f1d5162231ea4b8f8fe0feb3cf
+ENV FUSEKI_VERSION 5.3.0
+ENV JENA_SHA512 996e2fd103ea6211c2f20d80402df83982375d58b3a967aa90e68cf5499a21d16e0b70a39716c28ad3b7ff2666cf875930ca76d0179536ab7e70778c136d81c1
+ENV JENA_VERSION 5.3.0
 
 ENV MIRROR https://dlcdn.apache.org
 ENV ARCHIVE http://archive.apache.org/dist
@@ -101,4 +101,4 @@ EXPOSE 3030
 USER 9008
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["java", "-cp", "*:/javalibs/*", "org.apache.jena.fuseki.cmd.FusekiCmd"]
+CMD ["java", "-cp", "*:/javalibs/*", "org.apache.jena.fuseki.main.cmds.FusekiServerCmd"]
