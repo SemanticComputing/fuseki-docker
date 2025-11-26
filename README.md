@@ -38,6 +38,8 @@ Note: if you wish to add new datasets using the Fuseki admin UI - and persist th
 
 Note 2: if you have the `assembler.ttl` file on a bind mount, using environment variables to enable Fuseki's endpoints (for writing data; see the Run section for details), e.g. `ENABLE_DATA_WRITE`, is not encouraged. Using both bind mount for the `assembler.ttl` file and e.g. `ENABLE_DATA_WRITE=true` causes a problem related to file permissions (`sed: couldn’t open temporary file /fuseki-base/configuration/sedXXX: Permission denied`) (which can be solved by either running the container as the root user or giving write permissions to the host directory that is mounted to the container; at least on Linux). The recommended way when having the `assembler.ttl` file on a bind mount is to edit the `assembler.ttl` file by hand to enable endpoints.
 
+Note 3: if you wish to support persistent backups, you also need to use volume/bind mount for the directory `/fuseki-base/backups`. In containerized production environments, you might want to consider sharing this volume with a sidecar like [atmoz/sftp](https://hub.docker.com/r/atmoz/sftp), so backups can be moved offsite using something like [rclone](https://rclone.org/).
+
 **Note on running in OpenShift**, if you use this image as a parent image (e.g. use your own Dockerfile to load the data inside the image using TDBLOADER): as containers are run as an arbitrary user, you'll have to ensure the write permission on the TDB and index directories, e.g. by adding the following lines in your Dockerfile after the tdbloader and indexing commands:
 
 ```
