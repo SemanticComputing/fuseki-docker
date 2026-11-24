@@ -21,10 +21,10 @@ LABEL maintainer="jouni.tuominen@aalto.fi"
 RUN apk add --update bash ca-certificates coreutils findutils jq pwgen ruby wget && rm -rf /var/cache/apk/*
 
 # Update below according to https://jena.apache.org/download/
-ENV FUSEKI_SHA512 ba65f5867d2d4741b2ed9e2af5a0d4fbb447909894ab2a0c6bc4dac8997f4fe339c87b13c48d45d054977769f0f8bf763ea346b1f7792d5cdc458041bd43a132
-ENV FUSEKI_VERSION 6.2.0
-ENV JENA_SHA512 2b467d2ff940c207aea935e012ecbb0f0ab3e6bf59b3fc4b3fbc6cf9cea11f1428e97882ec078a5ffc57e114e0f5c88ea98c4575e687cc1dd232f99324b7b2a2
-ENV JENA_VERSION 6.2.0
+ENV FUSEKI_SHA512 18bb611a667d70842243b423fecd36c247e43d495d12889908e38711b57bea547d07641bd8b6dcacba6e40c019e6fce736adb3240e63799676bfba31c3e3bc7f
+ENV FUSEKI_VERSION 6.3.0
+ENV JENA_SHA512 828ac4bc3b377eacbadd888de5558039688a28eb5357fc741c2eb833582447f53455f75857bd1c832114c9d58beb671d581bad84ea5f0f31d3aff74fe805f0ce
+ENV JENA_VERSION 6.3.0
 
 ENV MIRROR https://dlcdn.apache.org
 ENV ARCHIVE http://archive.apache.org/dist
